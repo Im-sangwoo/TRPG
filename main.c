@@ -16,9 +16,9 @@ void ClearBuffer();
 int main() {
     int computerGrid[SIZE][SIZE] = { 0 }; // 처음 출제자의 그리드 (빈 공간은 0)
     int userGuess[SIZE][SIZE] = { 0 };    // 사용자의 3x3 숫자 입력 그리드
-    int strike, ball, attempts = 0;
+    int strike, ball, attempts = 0; // 초기에는 0으로 세팅
 
-    srand((unsigned)time(NULL));
+    srand((unsigned)time(NULL)); // 매번 다른 시드를 위해 쓰는 코드
     ComputerSpace(computerGrid);
 
     printf("=== 3x3 숫자 야구 게임 ===\n");
@@ -52,7 +52,7 @@ int main() {
         }
     }
 
-    printf("\n정답 :\n");
+    printf("\n정답 :\n"); // 답을 맞춘 경우 혹은 기회를 모두 소진했을때 호출
     for (int i = 0; i < SIZE; i++) {
         PrintRow(computerGrid[i], i + 1);
     }
@@ -62,10 +62,10 @@ int main() {
 
 // 출제자가 3x3 공간에 넣을 3개의 숫자를 생성
 void ComputerSpace(int grid[SIZE][SIZE]) {
-    int numbers[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // 1~9까지 숫자를 준비
+    int numbers[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // 1~9까지 숫자 준비
     int count = 0;
 
-    // 숫자를 무작위로 섞기
+    // 1~9의 숫자를 무작위로 섞음
     for (int i = 0; i < 9; i++) {
         int j = rand() % 9;
         int temp = numbers[i];
@@ -73,10 +73,13 @@ void ComputerSpace(int grid[SIZE][SIZE]) {
         numbers[j] = temp;
     }
 
-    // 랜덤하게 뽑은 숫자 3개를 3x3 공간에 배열
-    for (int i = 0; i < SIZE && count < 3; i++) {
-        for (int j = 0; j < SIZE && count < 3; j++) {
-            grid[i][j] = numbers[count++];
+    // 3개의 숫자를 무작위 위치에 배치
+    while (count < 3) {
+        int i = rand() % SIZE;  // 0 ~ 2 사이의 랜덤 행 위치
+        int j = rand() % SIZE;  // 0 ~ 2 사이의 랜덤 열 위치
+
+        if (grid[i][j] == 0) {   // 해당 위치가 비어있다면
+            grid[i][j] = numbers[count++]; // 숫자를 배치하고 카운트 증가
         }
     }
 }
