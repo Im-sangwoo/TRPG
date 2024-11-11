@@ -11,7 +11,7 @@ void UserGuess(int guess[SIZE][SIZE]);
 void CheckAnswer(int grid[SIZE][SIZE], int guess[SIZE][SIZE], int* strike, int* ball);
 void PrintRow(int row[], int rowNum);
 void ClearBuffer();
-void PrintGuessGrid(int guess[SIZE][SIZE]);
+
 
 int main() {
     int computerGrid[SIZE][SIZE] = { 0 }; // 처음 출제자의 그리드 (빈 공간은 0)
@@ -26,6 +26,9 @@ int main() {
     printf("이 숫자야구는 기존에 했던 숫자야구와는 다르게 위치와 숫자 모두 맞추셔야합니다!\n");
     printf("그럼 한번 당신의 추리력을 보여주시죠!\n");
     printf("그런데 이 친구가 많은 기회는 주지 않을것 같네요..\n");
+    
+    system("pause"); // 화면 초기화 전 한번 멈추기
+    system("cls");  // 화면 초기화
 
 
     while (1) {
@@ -109,16 +112,6 @@ void UserGuess(int guess[SIZE][SIZE]) {
         // 현재 입력한 행만 출력
         printf("%d번째 행 입력 값: ", i + 1);
         PrintRow(guess[i], i + 1);
-    }
-}
-
-void PrintGuessGrid(int guess[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            if (guess[i][j] == 0) printf("_ ");
-            else printf("%d ", guess[i][j]);
-        }
-        printf("\n");
     }
 }
 
