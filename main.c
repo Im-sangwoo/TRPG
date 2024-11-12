@@ -56,7 +56,7 @@ int main() {
     for (int i = 0; i < SIZE; i++) {
         PrintRow(computerGrid[i], i + 1);
     }
-
+    system("pause");
     return 0;
 }
 
